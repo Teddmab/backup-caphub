@@ -1,0 +1,51 @@
+[submodule "ExpatAcademy-Student"]
+	path = ExpatAcademy-Student
+	url = https://github.com/Teddmab/ExpatAcademy-Student.git
+
+[submodule "Backend---ExpatAc"]
+	path = Backend---ExpatAc
+	url = https://github.com/Teddmab/Backend---ExpatAc.git
+
+[submodule "LaSo-Coach/LaSo-Coach-Frontend"]
+	path = LaSo-Coach/LaSo-Coach-Frontend
+	url = https://github.com/Teddmab/LaSo-Coach-Frontend.git
+
+[submodule "LaSo-Coach/LaSo-Coach-Backend"]
+	path = LaSo-Coach/LaSo-Coach-Backend
+	url = https://github.com/Teddmab/LaSo-Coach-Backend.git
+
+[submodule "LaSo-Coach/LaSo-Coach-Admin"]
+	path = LaSo-Coach/LaSo-Coach-Admin
+	url = https://github.com/Teddmab/LaSo-Coach-Admin.git
+
+[submodule "LaSo-Coach/LaSo-Coach-iOS"]
+	path = LaSo-Coach/LaSo-Coach-iOS
+	url = https://github.com/Teddmab/LaSo-Coach-Mobile.git
+
+[submodule "Yaka-App"]
+	path = Yaka-App
+	url = https://github.com/Teddmab/Yaka-App.git
+
+[submodule "Backend-EmpHER"]
+	path = Backend-EmpHER
+	url = https://github.com/Teddmab/Backend-EmpHER.git
+
+[submodule "SweetBalance/SweetBalance-Admin"]
+	path = SweetBalance/SweetBalance-Admin
+	url = https://github.com/Teddmab/LaSo-Coach-Admin.git
+
+[submodule "SweetBalance/SweetBalance-Backend"]
+	path = SweetBalance/SweetBalance-Backend
+	url = https://github.com/Teddmab/LaSo-Coach-Backend.git
+
+[submodule "SweetBalance/SweetBalance-Frontend"]
+	path = SweetBalance/SweetBalance-Frontend
+	url = https://github.com/Teddmab/LaSo-Coach-Frontend.git
+
+[submodule "expatacademy-admin"]
+	path = expatacademy-admin
+	url = https://github.com/Teddmab/expatacademy-admin.git
+
+[submodule "FrontEnd-EmpHER"]
+	path = FrontEnd-EmpHER
+	url = https://github.com/Teddmab/FrontEnd-EmpHER.git
