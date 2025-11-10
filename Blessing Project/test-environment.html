@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSP Assignments Test Environment - BLESSING KAMALEBO MABULAY</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+        }
+        .author-info {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+        .assignment-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .assignment-section h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .test-area {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+        .input-field {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 5px;
+            width: 200px;
+        }
+        .output-area {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            min-height: 50px;
+            font-family: monospace;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .warning { color: #ffc107; }
+        .info { color: #17a2b8; }
+        
+        /* Interactive App Styles */
+        .interactive-app {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px 0;
+            min-height: 300px;
+            position: relative;
+        }
+        .icon {
+            position: absolute;
+            font-size: 2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* Task Manager Styles */
+        .task-manager {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+        .task-list {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .task-item {
+            background: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border-left: 4px solid #007bff;
+        }
+        .task-item.completed {
+            border-left-color: #28a745;
+            opacity: 0.7;
+        }
+        .task-item.high-priority {
+            border-left-color: #dc3545;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>CSP Assignments Test Environment</h1>
+            <p>This environment simulates code.org's App Lab for testing your assignments</p>
+            <div class="author-info">
+                <strong>Author:</strong> BLESSING KAMALEBO MABULAY<br>
+                <strong>Class:</strong> Computer Science Principles<br>
+                <strong>Date:</strong> January 2024
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to Use This Test Environment:</h3>
+            <p>1. Click the test buttons to see how each assignment should work</p>
+            <p>2. Use the code examples as templates for your actual code.org projects</p>
+            <p>3. Test all functionality before transferring to code.org</p>
+            <p>4. Make sure to add your own comments and justifications</p>
+        </div>
+        
+        <!-- Assignment 1: Data Visualization -->
+        <div class="assignment-section">
+            <h2>Assignment 1: Data Visualization</h2>
+            <div class="test-area">
+                <h3>Test Data Visualization</h3>
+                <p><strong>Purpose:</strong> Analyze meaningful patterns in data and create visualizations</p>
+                <button class="button" onclick="testDataVisualization()">Run Data Analysis</button>
+                <button class="button" onclick="loadSampleData()">Load Sample Data</button>
+                <div class="output-area" id="dataVizOutput">
+                    Click "Run Data Analysis" to test the data visualization code.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Assignment 2: Interactive App -->
+        <div class="assignment-section">
+            <h2>Assignment 2: Interactive App with Random Elements</h2>
+            <div class="test-area">
+                <h3>Test Interactive App Functionality</h3>
+                <p><strong>Purpose:</strong> Create an interactive app with random shapes, colors, and positions</p>
+                <button class="button" onclick="initializeInteractiveApp()">Initialize App</button>
+                <button class="button" onclick="changeShapes()">Change Shapes</button>
+                <button class="button" onclick="changeLocations()">Change Locations</button>
+                <button class="button" onclick="changeColors()">Change Colors</button>
+                
+                <div class="interactive-app" id="interactiveApp">
+                    <h3>Interactive App Demo</h3>
+                    <p>Click the buttons above to see the app in action!</p>
+                    <div id="iconContainer"></div>
+                </div>
+                
+                <div class="output-area" id="interactiveAppOutput">
+                    Interactive app test area. Initialize the app to start testing.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Assignment 3: Final App (Task Manager) -->
+        <div class="assignment-section">
+            <h2>Assignment 3: Final App - Task Manager</h2>
+            <div class="test-area">
+                <h3>Test Task Manager Functionality</h3>
+                <p><strong>Purpose:</strong> Create a comprehensive multi-screen app demonstrating all coding structures</p>
+                <button class="button" onclick="initializeTaskManager()">Initialize Task Manager</button>
+                <button class="button" onclick="testLogin()">Test Login</button>
+                <button class="button" onclick="addSampleTasks()">Add Sample Tasks</button>
+                
+                <div class="task-manager">
+                    <div>
+                        <h4>Add New Task</h4>
+                        <input type="text" id="taskTitle" class="input-field" placeholder="Task Title">
+                        <input type="text" id="taskDescription" class="input-field" placeholder="Description">
+                        <select id="taskSubject" class="input-field">
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Science">Science</option>
+                            <option value="English">English</option>
+                            <option value="History">History</option>
+                        </select>
+                        <input type="date" id="taskDueDate" class="input-field">
+                        <select id="taskPriority" class="input-field">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                        <button class="button" onclick="addTask()">Add Task</button>
+                    </div>
+                    
+                    <div class="task-list" id="taskList">
+                        <h4>Task List</h4>
+                        <div id="taskItems">No tasks yet. Add some tasks to get started!</div>
+                    </div>
+                </div>
+                
+                <div class="output-area" id="taskManagerOutput">
+                    Task manager test area. Initialize the app to start testing.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for testing
+        // These variables keep track of the app's state during testing
+        let currentUser = "";
+        let isLoggedIn = false;
+        let taskList = [];
+        let timeUpdateInterval;
+        let iconIndex = 0;
+        let iconsList = ["❤️", "🎵", "😊", "🌍", "🌳", "⚡", "🌙", "⭐"];
+
+        // Mock code.org functions
+        // These simulate the functions you'll use in code.org
+        function setText(elementId, text) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = text;
+            }
+        }
+
+        function setProperty(elementId, property, value) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                if (property === "hidden") {
+                    element.style.display = value ? "none" : "block";
+                } else if (property === "text-color") {
+                    element.style.color = value;
+                } else if (property === "image") {
+                    element.textContent = value;
+                } else if (property === "x") {
+                    element.style.left = value + "px";
+                } else if (property === "y") {
+                    element.style.top = value + "px";
+                } else if (property === "width") {
+                    element.style.width = value + "px";
+                } else if (property === "height") {
+                    element.style.height = value + "px";
+                } else if (property === "icon-color") {
+                    element.style.color = value;
+                } else if (property === "background-color") {
+                    element.style.backgroundColor = value;
+                }
+            }
+        }
+
+        function getText(elementId) {
+            const element = document.getElementById(elementId);
+            return element ? element.value || element.textContent : "";
+        }
+
+        function console_log(message) {
+            const output = document.getElementById('dataVizOutput');
+            output.innerHTML += "<div class='info'>" + message + "</div>";
+        }
+
+        function randomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function rgb(r, g, b, a) {
+            return `rgba(${r}, ${g}, ${b}, ${a || 1})`;
+        }
+
+        // Assignment 1: Data Visualization Test
+        function loadSampleData() {
+            console_log("Loading sample ramen dataset...");
+            console_log("Dataset contains 100 entries with brand, price, and rating data.");
+            console_log("This simulates loading data from code.org's dataset.");
+        }
+
+        function testDataVisualization() {
+            console_log("=== Data Visualization Test ===");
+            console_log("Testing ramen price vs rating correlation analysis...");
+            console_log("This demonstrates the analysis process you'll implement.");
+            
+            // Simulate data loading
+            const brands = ["Nissin", "Maruchan", "Samyang", "Paldo", "Ottogi"];
+            const prices = [0.5, 0.8, 1.2, 1.5, 2.0];
+            const ratings = [3.5, 3.8, 4.2, 4.0, 4.5];
+            
+            console_log("Dataset loaded with " + brands.length + " entries");
+            
+            // Simulate filtering
+            const validData = [];
+            for (let i = 0; i < brands.length; i++) {
+                if (prices[i] > 0 && ratings[i] > 0) {
+                    validData.push({
+                        brand: brands[i],
+                        price: prices[i],
+                        rating: ratings[i]
+                    });
+                }
+            }
+            
+            console_log("Valid data points: " + validData.length);
+            
+            // Simulate correlation calculation
+            const correlation = 0.75;
+            console_log("Correlation coefficient: " + correlation);
+            
+            if (correlation > 0.3) {
+                console_log("There is a moderate positive correlation between price and rating");
+                console_log("This suggests that more expensive ramen tends to have higher ratings.");
+            } else {
+                console_log("There is little correlation between price and rating");
+            }
+            
+            console_log("=== Test Complete ===");
+            console_log("Remember to address potential biases in your actual analysis!");
+        }
+
+        // Assignment 2: Interactive App Test
+        function initializeInteractiveApp() {
+            const container = document.getElementById('iconContainer');
+            container.innerHTML = '';
+            
+            // Create 20 icons
+            for (let i = 0; i < 20; i++) {
+                const icon = document.createElement('div');
+                icon.className = 'icon';
+                icon.id = 'icon' + i;
+                icon.textContent = iconsList[0];
+                icon.style.left = randomNumber(50, 250) + 'px';
+                icon.style.top = randomNumber(50, 200) + 'px';
+                container.appendChild(icon);
+            }
+            
+            setText("interactiveAppOutput", "Interactive app initialized with 20 icons!");
+        }
+
+        function changeShapes() {
+            const lastIndex = iconIndex;
+            iconIndex = randomNumber(0, iconsList.length - 1);
+            while (iconIndex == lastIndex) {
+                iconIndex = randomNumber(0, iconsList.length - 1);
+            }
+            
+            for (let i = 0; i < 20; i++) {
+                const icon = document.getElementById('icon' + i);
+                if (icon) {
+                    icon.textContent = iconsList[iconIndex];
+                }
+            }
+            
+            setText("interactiveAppOutput", "Shapes changed to: " + iconsList[iconIndex]);
+        }
+
+        function changeLocations() {
+            for (let i = 0; i < 20; i++) {
+                const icon = document.getElementById('icon' + i);
+                if (icon) {
+                    icon.style.left = randomNumber(0, 300) + 'px';
+                    icon.style.top = randomNumber(0, 250) + 'px';
+                    icon.style.width = randomNumber(30, 60) + 'px';
+                    icon.style.height = randomNumber(30, 60) + 'px';
+                }
+            }
+            
+            setText("interactiveAppOutput", "All icons repositioned and resized!");
+        }
+
+        function changeColors() {
+            for (let i = 0; i < 20; i++) {
+                const icon = document.getElementById('icon' + i);
+                if (icon) {
+                    const red = randomNumber(0, 255);
+                    const green = randomNumber(0, 255);
+                    const blue = randomNumber(0, 255);
+                    icon.style.color = rgb(red, green, blue, 0.8);
+                }
+            }
+            
+            const app = document.getElementById('interactiveApp');
+            app.style.backgroundColor = rgb(randomNumber(0, 255), randomNumber(0, 255), randomNumber(0, 255), 0.3);
+            
+            setText("interactiveAppOutput", "Colors changed for all icons and background!");
+        }
+
+        // Assignment 3: Task Manager Test
+        function initializeTaskManager() {
+            console_log("Initializing Task Manager...");
+            currentUser = "testuser";
+            isLoggedIn = true;
+            taskList = [];
+            setText("taskManagerOutput", "Task Manager initialized. User: " + currentUser);
+            displayTasks();
+        }
+
+        function testLogin() {
+            const username = "student1";
+            const password = "password123";
+            
+            if (username && password) {
+                currentUser = username;
+                isLoggedIn = true;
+                setText("taskManagerOutput", "Login successful! User: " + currentUser);
+                loadTasksFromStorage();
+            } else {
+                setText("taskManagerOutput", "Login failed: Invalid credentials");
+            }
+        }
+
+        function addTask() {
+            const title = getText("taskTitle");
+            const description = getText("taskDescription");
+            const subject = getText("taskSubject");
+            const dueDate = getText("taskDueDate");
+            const priority = getText("taskPriority");
+            
+            if (!title || !subject || !dueDate) {
+                setText("taskManagerOutput", "Error: Please fill in all required fields");
+                return false;
+            }
+            
+            const newTask = {
+                id: Date.now() + Math.random(),
+                title: title,
+                description: description,
+                subject: subject,
+                dueDate: dueDate,
+                priority: priority,
+                completed: false,
+                createdDate: new Date().toISOString().split('T')[0]
+            };
+            
+            taskList.push(newTask);
+            saveTasksToStorage();
+            displayTasks();
+            setText("taskManagerOutput", "Task added successfully!");
+            
+            // Clear form
+            document.getElementById("taskTitle").value = "";
+            document.getElementById("taskDescription").value = "";
+            document.getElementById("taskDueDate").value = "";
+            
+            return true;
+        }
+
+        function addSampleTasks() {
+            const sampleTasks = [
+                {
+                    title: "Math Homework",
+                    description: "Complete problems 1-20",
+                    subject: "Mathematics",
+                    dueDate: "2024-01-15",
+                    priority: "high"
+                },
+                {
+                    title: "Science Lab Report",
+                    description: "Write up experiment results",
+                    subject: "Science",
+                    dueDate: "2024-01-20",
+                    priority: "medium"
+                },
+                {
+                    title: "English Essay",
+                    description: "Write 5-page essay on Shakespeare",
+                    subject: "English",
+                    dueDate: "2024-01-25",
+                    priority: "high"
+                }
+            ];
+            
+            sampleTasks.forEach(task => {
+                const newTask = {
+                    id: Date.now() + Math.random(),
+                    title: task.title,
+                    description: task.description,
+                    subject: task.subject,
+                    dueDate: task.dueDate,
+                    priority: task.priority,
+                    completed: false,
+                    createdDate: new Date().toISOString().split('T')[0]
+                };
+                taskList.push(newTask);
+            });
+            
+            saveTasksToStorage();
+            displayTasks();
+            setText("taskManagerOutput", "Sample tasks added successfully!");
+        }
+
+        function displayTasks() {
+            const taskItems = document.getElementById("taskItems");
+            if (taskList.length === 0) {
+                taskItems.innerHTML = "No tasks yet. Add some tasks to get started!";
+                return;
+            }
+            
+            let html = "";
+            for (let i = 0; i < taskList.length; i++) {
+                const task = taskList[i];
+                const taskClass = task.completed ? "task-item completed" : 
+                                 task.priority === "high" ? "task-item high-priority" : "task-item";
+                
+                html += `
+                    <div class="${taskClass}">
+                        <strong>${task.title}</strong> (${task.subject})
+                        <br><small>Due: ${task.dueDate} | Priority: ${task.priority}</small>
+                        <br><small>${task.description}</small>
+                        <button class="button" onclick="toggleTask(${task.id})" style="margin-left: 10px;">
+                            ${task.completed ? 'Undo' : 'Complete'}
+                        </button>
+                        <button class="button" onclick="deleteTask(${task.id})" style="background: #dc3545;">
+                            Delete
+                        </button>
+                    </div>
+                `;
+            }
+            taskItems.innerHTML = html;
+        }
+
+        function toggleTask(taskId) {
+            for (let i = 0; i < taskList.length; i++) {
+                if (taskList[i].id === taskId) {
+                    taskList[i].completed = !taskList[i].completed;
+                    if (taskList[i].completed) {
+                        taskList[i].completedDate = new Date().toISOString().split('T')[0];
+                    }
+                    break;
+                }
+            }
+            saveTasksToStorage();
+            displayTasks();
+            setText("taskManagerOutput", "Task status updated!");
+        }
+
+        function deleteTask(taskId) {
+            taskList = taskList.filter(task => task.id !== taskId);
+            saveTasksToStorage();
+            displayTasks();
+            setText("taskManagerOutput", "Task deleted!");
+        }
+
+        function saveTasksToStorage() {
+            try {
+                localStorage.setItem("userTasks_" + currentUser, JSON.stringify(taskList));
+                console_log("Tasks saved successfully");
+            } catch (error) {
+                console_log("Error saving tasks: " + error.message);
+            }
+        }
+
+        function loadTasksFromStorage() {
+            try {
+                const taskData = localStorage.getItem("userTasks_" + currentUser);
+                if (taskData) {
+                    taskList = JSON.parse(taskData);
+                    console_log("Tasks loaded successfully");
+                } else {
+                    taskList = [];
+                }
+            } catch (error) {
+                console_log("Error loading tasks: " + error.message);
+                taskList = [];
+            }
+            displayTasks();
+        }
+
+        // Initialize the test environment
+        console_log("CSP Assignments Test Environment loaded successfully!");
+        console_log("Author: BLESSING KAMALEBO MABULAY");
+        console_log("Use the buttons above to test each assignment's functionality.");
+    </script>
+</body>
+</html> 

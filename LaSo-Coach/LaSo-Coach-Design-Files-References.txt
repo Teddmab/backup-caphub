@@ -1,0 +1,574 @@
+LaSo-Coach: Design Files & Technical References
+===============================================
+
+PROJECT DESIGN SYSTEM & UI/UX GUIDELINES
+========================================
+
+Brand Identity & Visual Design
+==============================
+
+Color Palette:
+Primary Colors:
+- Primary Green: #AED036 (Main brand color)
+- Light Green: #D6F5A7 (Background accents)
+- Dark Green: #2C340E (Text and emphasis)
+- White: #FFFFFF (Background)
+- Black: #000000 (Text)
+
+Secondary Colors:
+- Success Green: #10B981 (Success states)
+- Warning Orange: #F59E0B (Warning states)
+- Error Red: #EF4444 (Error states)
+- Info Blue: #3B82F6 (Information states)
+
+Typography:
+- Primary Font: 'DM Serif Display' (Headings)
+- Secondary Font: 'Inter' (Body text)
+- Monospace: 'JetBrains Mono' (Code elements)
+
+Font Sizes:
+- H1: 2.5rem (40px)
+- H2: 2rem (32px)
+- H3: 1.5rem (24px)
+- H4: 1.25rem (20px)
+- Body: 1rem (16px)
+- Small: 0.875rem (14px)
+- Caption: 0.75rem (12px)
+
+Spacing System:
+- XS: 0.25rem (4px)
+- S: 0.5rem (8px)
+- M: 1rem (16px)
+- L: 1.5rem (24px)
+- XL: 2rem (32px)
+- XXL: 3rem (48px)
+
+Border Radius:
+- Small: 0.25rem (4px)
+- Medium: 0.5rem (8px)
+- Large: 1rem (16px)
+- Full: 9999px (Circular elements)
+
+Shadows:
+- Small: 0 1px 2px 0 rgba(0, 0, 0, 0.05)
+- Medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1)
+- Large: 0 10px 15px -3px rgba(0, 0, 0, 0.1)
+- Extra Large: 0 25px 50px -12px rgba(0, 0, 0, 0.25)
+
+COMPONENT LIBRARY & DESIGN PATTERNS
+===================================
+
+Navigation Components:
+- Sidebar Navigation: Collapsible sidebar with unread counts
+- Top Navigation: Header with user menu and notifications
+- Breadcrumb Navigation: Page hierarchy navigation
+- Tab Navigation: Content switching tabs
+- Pagination: Page navigation for lists
+
+Form Components:
+- Input Fields: Text, email, password, number inputs
+- Select Dropdowns: Single and multi-select options
+- Checkboxes: Single and group checkboxes
+- Radio Buttons: Single selection options
+- Textarea: Multi-line text input
+- File Upload: Drag and drop file upload
+- Date Picker: Calendar date selection
+- Time Picker: Time selection component
+
+Button Components:
+- Primary Button: Main action buttons
+- Secondary Button: Secondary actions
+- Outline Button: Bordered action buttons
+- Ghost Button: Minimal action buttons
+- Icon Button: Icon-only action buttons
+- Loading Button: Buttons with loading states
+- Disabled Button: Inactive button states
+
+Card Components:
+- Content Cards: Information display cards
+- Action Cards: Interactive feature cards
+- Profile Cards: User profile information
+- Stat Cards: Metric display cards
+- Challenge Cards: Fitness challenge display
+- Meal Cards: Nutrition information cards
+
+Data Display Components:
+- Tables: Data tabulation
+- Lists: Ordered and unordered lists
+- Progress Bars: Progress indication
+- Charts: Data visualization
+- Badges: Status indicators
+- Avatars: User profile images
+- Icons: Interface icons
+
+Feedback Components:
+- Toast Notifications: Temporary success/error messages
+- Alert Messages: Important information display
+- Loading Spinners: Loading state indicators
+- Skeleton Screens: Content loading placeholders
+- Empty States: No data display states
+- Error Boundaries: Error handling components
+
+Modal Components:
+- Dialog Modals: Confirmation dialogs
+- Form Modals: Form input modals
+- Content Modals: Information display modals
+- Image Modals: Image viewing modals
+- Chat Modals: Real-time chat interface
+
+LAYOUT PATTERNS & RESPONSIVE DESIGN
+===================================
+
+Grid System:
+- 12-column responsive grid
+- Breakpoints: Mobile (320px), Tablet (768px), Desktop (1024px), Large Desktop (1440px)
+- Container max-widths: Mobile (100%), Tablet (750px), Desktop (1200px), Large Desktop (1400px)
+
+Layout Patterns:
+- Single Column: Mobile-first single column layout
+- Two Column: Sidebar and main content layout
+- Three Column: Complex dashboard layouts
+- Card Grid: Responsive card-based layouts
+- Masonry: Pinterest-style layouts
+- Hero Section: Landing page hero layouts
+
+Responsive Breakpoints:
+- Mobile: 320px - 767px
+- Tablet: 768px - 1023px
+- Desktop: 1024px - 1439px
+- Large Desktop: 1440px+
+
+Mobile-First Approach:
+- Base styles for mobile devices
+- Progressive enhancement for larger screens
+- Touch-friendly interface elements
+- Optimized navigation for mobile
+- Gesture support for mobile interactions
+
+INTERACTION DESIGN & ANIMATIONS
+===============================
+
+Micro-interactions:
+- Button hover effects
+- Form field focus states
+- Loading animations
+- Success/error feedback
+- Page transitions
+- Scroll animations
+
+Animation Guidelines:
+- Duration: Fast (150ms), Normal (300ms), Slow (500ms)
+- Easing: Ease-in-out for natural movement
+- Stagger: Sequential element animations
+- Scale: Subtle size changes for feedback
+- Opacity: Fade in/out transitions
+
+Hover States:
+- Button hover effects with color changes
+- Card hover with elevation changes
+- Link hover with underline effects
+- Icon hover with scale effects
+- Image hover with overlay effects
+
+Loading States:
+- Skeleton screens for content loading
+- Spinner animations for actions
+- Progress bars for multi-step processes
+- Shimmer effects for data loading
+- Pulse animations for real-time updates
+
+ACCESSIBILITY GUIDELINES
+========================
+
+WCAG 2.1 Compliance:
+- Level AA compliance target
+- Keyboard navigation support
+- Screen reader compatibility
+- Color contrast requirements
+- Focus management
+
+Color Accessibility:
+- Minimum contrast ratio: 4.5:1 for normal text
+- Minimum contrast ratio: 3:1 for large text
+- Color-blind friendly palette
+- High contrast mode support
+- Focus indicators for keyboard navigation
+
+Typography Accessibility:
+- Minimum font size: 16px for body text
+- Line height: 1.5 for readability
+- Font weight: 400 for normal text, 600+ for emphasis
+- Text spacing: 0.12em letter spacing for small text
+- Font family: Sans-serif for better readability
+
+Interactive Elements:
+- Minimum touch target: 44px x 44px
+- Focus indicators for all interactive elements
+- Keyboard navigation support
+- Voice control compatibility
+- Gesture alternatives for mobile
+
+TECHNICAL IMPLEMENTATION REFERENCES
+===================================
+
+Frontend Technology Stack:
+React 18 + TypeScript:
+- Component-based architecture
+- TypeScript for type safety
+- React Hooks for state management
+- Context API for global state
+- React Router for navigation
+
+Build Tools:
+- Vite for fast development and building
+- TypeScript compilation
+- Hot module replacement
+- Code splitting and optimization
+- Environment-specific builds
+
+Styling Framework:
+- Tailwind CSS for utility-first styling
+- Custom CSS variables for theming
+- Responsive design utilities
+- Dark mode support
+- Component-specific styles
+
+State Management:
+- React Context API for global state
+- Local state with useState
+- Custom hooks for reusable logic
+- State persistence with localStorage
+- Real-time state with WebSocket
+
+Form Handling:
+- React Hook Form for form management
+- Zod for schema validation
+- Form error handling
+- Real-time validation
+- File upload integration
+
+Real-time Features:
+- Socket.IO client for WebSocket connections
+- Real-time chat implementation
+- Live notification updates
+- Presence system for online status
+- Typing indicators
+
+Backend Technology Stack:
+Node.js + Express:
+- RESTful API architecture
+- Middleware for request processing
+- Error handling and logging
+- Rate limiting and security
+- CORS configuration
+
+Database:
+- PostgreSQL with Prisma ORM
+- Database migrations
+- Connection pooling
+- Query optimization
+- Data validation
+
+Authentication:
+- JWT token-based authentication
+- Refresh token mechanism
+- Role-based access control
+- Password hashing with bcrypt
+- Session management
+
+File Storage:
+- AWS S3 for file uploads
+- Image processing and optimization
+- File type validation
+- Access control and security
+- CDN integration
+
+Payment Integration:
+- Stripe for payment processing
+- PayPal for alternative payments
+- Webhook handling for payment events
+- Subscription management
+- Refund processing
+
+COMPONENT ARCHITECTURE & CODE PATTERNS
+======================================
+
+Component Structure:
+```
+src/
+├── components/
+│   ├── common/
+│   │   ├── Button/
+│   │   ├── Input/
+│   │   ├── Modal/
+│   │   └── Card/
+│   ├── layout/
+│   │   ├── Sidebar/
+│   │   ├── Header/
+│   │   └── Footer/
+│   ├── features/
+│   │   ├── Chat/
+│   │   ├── Progress/
+│   │   └── Challenges/
+│   └── pages/
+│       ├── Dashboard/
+│       ├── Profile/
+│       └── Settings/
+├── hooks/
+│   ├── useAuth.ts
+│   ├── useChat.ts
+│   └── useWebSocket.ts
+├── services/
+│   ├── api.ts
+│   ├── auth.ts
+│   └── chat.ts
+├── utils/
+│   ├── validation.ts
+│   ├── formatting.ts
+│   └── constants.ts
+└── types/
+    ├── user.ts
+    ├── chat.ts
+    └── api.ts
+```
+
+Code Patterns:
+- Functional components with hooks
+- Custom hooks for reusable logic
+- TypeScript interfaces for type safety
+- Error boundaries for error handling
+- Lazy loading for performance
+- Memoization for optimization
+
+API Integration:
+- Axios for HTTP requests
+- Request/response interceptors
+- Error handling and retry logic
+- Authentication token management
+- API response caching
+
+State Management Patterns:
+- Context providers for global state
+- Local state for component-specific data
+- Custom hooks for complex state logic
+- State persistence with localStorage
+- Real-time state synchronization
+
+PERFORMANCE OPTIMIZATION GUIDELINES
+===================================
+
+Frontend Performance:
+- Code splitting and lazy loading
+- Image optimization and compression
+- Bundle size optimization
+- Caching strategies
+- Progressive Web App features
+
+Backend Performance:
+- Database query optimization
+- Connection pooling
+- Caching with Redis
+- API response optimization
+- Background job processing
+
+Loading Optimization:
+- Skeleton screens for content loading
+- Progressive image loading
+- Preloading critical resources
+- Service worker for offline support
+- CDN for static assets
+
+Monitoring & Analytics:
+- Performance monitoring with Lighthouse
+- Error tracking with Sentry
+- User analytics with Google Analytics
+- Real-time monitoring with New Relic
+- Custom performance metrics
+
+SECURITY IMPLEMENTATION GUIDELINES
+==================================
+
+Frontend Security:
+- Input validation and sanitization
+- XSS prevention
+- CSRF protection
+- Secure storage of sensitive data
+- HTTPS enforcement
+
+Backend Security:
+- Authentication and authorization
+- Input validation with Zod
+- SQL injection prevention
+- Rate limiting
+- Security headers with Helmet
+
+Data Protection:
+- GDPR compliance
+- Data encryption at rest
+- Secure transmission with HTTPS
+- Access control and permissions
+- Audit logging
+
+API Security:
+- JWT token validation
+- Request rate limiting
+- Input sanitization
+- Error handling without information leakage
+- CORS configuration
+
+TESTING STRATEGY & QUALITY ASSURANCE
+====================================
+
+Frontend Testing:
+- Unit tests with Jest and React Testing Library
+- Component testing for UI components
+- Integration tests for feature workflows
+- E2E tests with Cypress
+- Visual regression testing
+
+Backend Testing:
+- Unit tests for business logic
+- Integration tests for API endpoints
+- Database testing with test fixtures
+- Performance testing with load testing
+- Security testing with penetration tests
+
+Quality Assurance:
+- Code review process
+- Automated testing in CI/CD
+- Performance monitoring
+- Accessibility testing
+- Cross-browser compatibility
+
+DEPLOYMENT & DEVOPS REFERENCES
+==============================
+
+Frontend Deployment:
+- Netlify for static site hosting
+- Vite build optimization
+- Environment variable management
+- Custom domain configuration
+- SSL certificate setup
+
+Backend Deployment:
+- Render for Node.js hosting
+- Environment configuration
+- Database connection management
+- Health check endpoints
+- Logging and monitoring
+
+Database Deployment:
+- Neon for PostgreSQL hosting
+- Database migrations
+- Backup and recovery
+- Connection pooling
+- Performance monitoring
+
+CI/CD Pipeline:
+- GitHub Actions for automation
+- Automated testing
+- Code quality checks
+- Security scanning
+- Automated deployment
+
+Environment Management:
+- Development environment setup
+- Staging environment configuration
+- Production environment deployment
+- Environment-specific variables
+- Database migration management
+
+MONITORING & ANALYTICS IMPLEMENTATION
+=====================================
+
+Application Monitoring:
+- Error tracking with Sentry
+- Performance monitoring with New Relic
+- Uptime monitoring with Pingdom
+- Log aggregation with Loggly
+- Real-time alerting
+
+User Analytics:
+- Google Analytics for user behavior
+- Custom event tracking
+- Conversion funnel analysis
+- User engagement metrics
+- A/B testing capabilities
+
+Business Analytics:
+- Revenue tracking and reporting
+- Subscription analytics
+- User retention metrics
+- Feature usage analytics
+- ROI analysis
+
+Performance Monitoring:
+- Core Web Vitals tracking
+- Page load time monitoring
+- API response time tracking
+- Database query performance
+- Error rate monitoring
+
+DOCUMENTATION & MAINTENANCE GUIDELINES
+======================================
+
+Code Documentation:
+- JSDoc comments for functions
+- README files for components
+- API documentation with Swagger
+- Architecture decision records
+- Code style guidelines
+
+User Documentation:
+- User guides and tutorials
+- FAQ documentation
+- Video tutorials
+- Interactive help system
+- Knowledge base
+
+Developer Documentation:
+- Setup and installation guides
+- API reference documentation
+- Database schema documentation
+- Deployment guides
+- Troubleshooting guides
+
+Maintenance Procedures:
+- Regular dependency updates
+- Security patch management
+- Performance optimization
+- Bug fix procedures
+- Feature enhancement process
+
+INTEGRATION GUIDELINES
+======================
+
+Third-party Integrations:
+- Stripe payment processing
+- PayPal payment processing
+- AWS S3 file storage
+- Email service integration
+- SMS notification service
+
+API Integration:
+- RESTful API design principles
+- GraphQL for complex queries
+- WebSocket for real-time features
+- OAuth for third-party authentication
+- Webhook handling for external events
+
+Mobile Integration:
+- React Native for mobile apps
+- Push notification integration
+- Offline functionality
+- Native device features
+- App store deployment
+
+External Services:
+- Email marketing integration
+- Analytics platform integration
+- Customer support integration
+- Social media integration
+- Payment gateway integration
+
+This comprehensive design system and technical reference guide provides the foundation for maintaining consistency, quality, and scalability across the LaSo-Coach platform while ensuring optimal user experience and developer productivity. 

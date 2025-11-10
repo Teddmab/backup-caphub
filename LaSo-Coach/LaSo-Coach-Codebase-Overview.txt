@@ -1,0 +1,587 @@
+LaSo Coach Codebase Overview
+================================
+
+Architecture Overview
+--------------------
+Your application follows a three-tier architecture:
+- Backend: Node.js/Express API with PostgreSQL database
+- Frontend: React web application for end users  
+- Admin: React/Vue hybrid admin panel for coaches and administrators
+
+================================
+
+1. LaSo-Coach-Backend
+=====================
+
+Technology Stack:
+- Runtime: Node.js with TypeScript
+- Framework: Express.js
+- Database: PostgreSQL with Prisma ORM
+- Real-time: Socket.IO for WebSocket connections
+- Authentication: JWT tokens with refresh mechanism
+- File Storage: AWS S3 for images and uploads
+- Payments: PayPal and Stripe integration
+- Email: Nodemailer with SMTP
+- Documentation: Swagger/OpenAPI
+
+Key Features & Implementation:
+
+Database Schema (Prisma):
+Core models include:
+- User (with roles: USER, COACH, ADMIN)
+- Profile (health metrics, goals, preferences)
+- Meal & NutritionPlans
+- Challenge & UserChallenge
+- Chat & ChatMessage
+- Subscription & SubscriptionPlan
+- Notification
+- Content & UserContent
+- TASCCProgress (points system)
+- CoachingSession
+- Community (Posts, Comments, Likes)
+
+API Structure:
+/api/v1/
+├── auth/           # Authentication (login, register, refresh)
+├── users/          # User management
+├── profile/        # User profiles and health data
+├── onboarding/     # User onboarding flow
+├── nutrition/      # Meals and nutrition plans
+├── challenges/     # Fitness challenges
+├── chat/           # Real-time messaging
+├── coaching/       # Coach-client sessions
+├── community/      # Social features
+├── payments/       # PayPal/Stripe integration
+├── notifications/  # Push notifications
+├── tascc/          # Points and leaderboard system
+└── admin/          # Admin-only endpoints
+
+Real-time Features:
+- WebSocket Service: Handles live chat, notifications, and presence
+- Chat System: Real-time messaging between users and coaches
+- Notifications: Instant push notifications for various events
+- Presence: Online/offline status tracking
+
+Payment Integration:
+- PayPal: Order creation and capture
+- Stripe: Payment intents and checkout sessions
+- Webhooks: Secure payment confirmation
+- Subscription Management: Plan assignment and billing
+
+File Upload System:
+- AWS S3: Secure file storage
+- Image Processing: Avatar and meal image uploads
+- Content Management: Educational content and media
+
+Key Backend Services:
+- AuthService: Authentication and authorization
+- UserService: User management operations
+- ChatService: Real-time messaging functionality
+- NotificationService: Push notification system
+- WebSocketService: Real-time communication
+- PaymentController: Payment processing
+- CoachingService: Coach-client session management
+- ChallengeService: Fitness challenge management
+- MealService: Nutrition and meal tracking
+- TASCCService: Points and leaderboard system
+
+================================
+
+2. LaSo-Coach-Frontend
+======================
+
+Technology Stack:
+- Framework: React 18 with TypeScript
+- Build Tool: Vite
+- Styling: Tailwind CSS
+- State Management: React Context API
+- Routing: React Router DOM
+- HTTP Client: Axios with interceptors
+- Real-time: Socket.IO client
+- Forms: React Hook Form with Zod validation
+- Charts: Recharts for analytics
+- Payments: Stripe React components
+
+Key Features & Implementation:
+
+Authentication Flow:
+Context-based auth with automatic token refresh
+- Login/Register with email validation
+- JWT token management
+- Automatic session refresh
+- Protected routes
+- Role-based access control
+
+Core Pages:
+- Dashboard: User overview and progress
+- Progress: Health metrics and achievements
+- Menus: Nutrition plans and meal tracking
+- Défis: Fitness challenges and competitions
+- Agenda: Content scheduling and sessions
+- Chat: Real-time messaging with coaches
+- L'Agora: Community features and social interaction
+- Notifications: Push notification center
+
+Real-time Features:
+- WebSocket Context: Global WebSocket management
+- Chat Context: Real-time messaging state
+- Notification Bell: Live notification updates
+- Floating Chat Button: Quick access to messaging
+
+UI/UX Design:
+- Color Scheme: Green theme (#D6F5A7, #AED036, #2C340E)
+- Responsive Design: Mobile-first approach
+- Sidebar Navigation: Collapsible on mobile
+- Loading States: Skeleton screens and spinners
+- Toast Notifications: User feedback system
+
+Key Frontend Components:
+- Sidebar: Navigation with unread counts
+- SplashScreen: Loading screen
+- FloatingChatButton: Quick chat access
+- NotificationBell: Real-time notifications
+- Dashboard: User progress overview
+- Progress: Health metrics visualization
+- Chat: Real-time messaging interface
+- Agora: Community features
+
+================================
+
+3. LaSo-Coach-Admin
+===================
+
+Technology Stack:
+- Framework: React 19 + Vue 3 hybrid
+- Build Tool: Vite
+- Styling: Tailwind CSS with Radix UI components
+- State Management: TanStack Query + Pinia
+- Charts: Chart.js with React Chart.js 2
+- Data Export: PapaParse for CSV exports
+- Real-time: Socket.IO client
+
+Key Features & Implementation:
+
+Admin Dashboard:
+- Analytics: User statistics and engagement metrics
+- User Management: CRUD operations for all users
+- Content Management: Educational content creation and assignment
+- Nutrition Management: Meal plans and menu creation
+- Challenge Management: Fitness challenge administration
+- Coaching Management: Session scheduling and management
+- Payment Management: Subscription and transaction oversight
+- TASCC Points: Points system administration
+
+Core Pages:
+- Dashboard: Overview statistics and charts
+- Users: User management with filtering and search
+- Nutrition: Meal, menu, and plan management
+- Challenges: Challenge creation and monitoring
+- Coaching: Session management and scheduling
+- Community: Post moderation and management
+- Content: Educational content creation
+- FAQs: FAQ management system
+- Analytics: Detailed reporting and insights
+- Chat: Admin chat interface
+- Notifications: System notification management
+- TascPoints: Points system administration
+- Payments: Payment processing and management
+
+Key Admin Services:
+- adminService: Admin-specific API operations
+- User management with role-based access
+- Content assignment and management
+- Analytics and reporting
+- Payment processing oversight
+- Challenge and nutrition plan management
+
+================================
+
+Integration Points for Mobile Development
+========================================
+
+API Endpoints to Focus On:
+Core mobile endpoints:
+GET    /api/v1/users/profile          # User profile
+PUT    /api/v1/profile                # Update profile
+GET    /api/v1/onboarding/progress    # Onboarding status
+POST   /api/v1/onboarding/measurements # Health data
+GET    /api/v1/meals                  # User meals
+POST   /api/v1/meals                  # Log meals
+GET    /api/v1/challenges             # Available challenges
+GET    /api/v1/tascc/progress         # Points and progress
+GET    /api/v1/chat/conversations     # Chat conversations
+POST   /api/v1/chat/conversations/:id/messages # Send messages
+GET    /api/v1/notifications          # User notifications
+
+WebSocket Events for Mobile:
+Key real-time events:
+'socket:connect'           # Connection establishment
+'notification:new'         # New notification
+'chat:message'             # New chat message
+'chat:typing'              # Typing indicators
+'presence:update'          # User online/offline
+
+Authentication Flow:
+Mobile auth sequence:
+1. POST /api/v1/auth/login     # Login with email/password
+2. Store JWT token locally     # Secure storage
+3. Use token in API headers    # Authorization: Bearer <token>
+4. Handle 401 responses        # Refresh token or re-login
+5. Implement auto-logout       # Token expiration handling
+
+File Upload for Mobile:
+Image upload flow:
+1. Select image from device
+2. Compress/resize if needed
+3. POST to /api/v1/profile/avatar with FormData
+4. Include Authorization header
+5. Handle upload progress
+6. Update UI with new image URL
+
+================================
+
+Deployment & Environment
+========================
+
+Environment Variables Required:
+
+Backend (.env):
+DATABASE_URL=postgresql://...
+JWT_SECRET=your-secret-key
+JWT_EXPIRES_IN=7d
+SMTP_HOST=your-smtp-host
+SMTP_PORT=587
+SMTP_USER=your-smtp-user
+SMTP_PASS=your-smtp-password
+SMTP_FROM=noreply@lasocoach.com
+AWS_ACCESS_KEY_ID=your-aws-key
+AWS_SECRET_ACCESS_KEY=your-aws-secret
+AWS_REGION=us-east-1
+S3_BUCKET_NAME=your-bucket
+FRONTEND_URL_ADMIN=http://localhost:5173
+FRONTEND_URL_APP=http://localhost:5174
+PAYPAL_CLIENT_ID=your-paypal-id
+PAYPAL_CLIENT_SECRET=your-paypal-secret
+PAYPAL_API_BASE_URL=https://api-m.sandbox.paypal.com
+PAYPAL_RETURN_URL=http://localhost:5174/payment/success
+PAYPAL_CANCEL_URL=http://localhost:5174/payment/cancel
+PORT=3000
+API_BASE_URL=http://localhost:3000/api
+TASCC_MAX_POINTS=1000
+
+Frontend (.env):
+VITE_API_URL=http://localhost:3000/api
+VITE_WS_URL=http://localhost:3000
+VITE_APP_NAME=LaSo Coach
+
+Database Migrations:
+Run migrations:
+npm run prisma:migrate
+npm run prisma:generate
+npm run prisma:deploy
+
+================================
+
+Key Implementation Notes for Mobile
+===================================
+
+1. Authentication: Implement secure token storage and automatic refresh
+2. Real-time: Use WebSocket for live features (chat, notifications)
+3. Offline Support: Consider caching for meals, challenges, and content
+4. Push Notifications: Integrate with mobile push services
+5. Image Handling: Implement image compression and upload progress
+6. Payment Integration: Use mobile-optimized payment flows
+7. Data Sync: Handle offline data synchronization
+8. Performance: Implement lazy loading and pagination
+9. Error Handling: Robust error handling and retry mechanisms
+10. Testing: Comprehensive testing for critical user flows
+
+================================
+
+Database Schema Details
+=======================
+
+User Model:
+- id: String (UUID)
+- email: String (unique)
+- password: String (hashed)
+- name: String
+- avatar: String (optional)
+- role: Role (USER, COACH, ADMIN)
+- firstName: String (optional)
+- lastName: String (optional)
+- address: String (optional)
+- phoneNumber: String (optional)
+- isActive: Boolean
+- isVerified: Boolean
+- lastLogin: DateTime (optional)
+- lastSeen: DateTime (optional)
+
+Profile Model:
+- id: String (UUID)
+- userId: String (unique)
+- height: Float (optional)
+- goals: String[]
+- dietaryRestrictions: String[]
+- preferences: Json
+- goal: String (optional)
+- initialWeight: Float (optional)
+- targetWeight: Float (optional)
+- initialWaistSize: Float (optional)
+- targetWaistSize: Float (optional)
+- gender: String (optional)
+- occupation: String (optional)
+
+Meal Model:
+- id: String (UUID)
+- userId: String
+- name: String
+- calories: Int
+- proteins: Float
+- carbs: Float
+- fats: Float
+- date: DateTime
+- type: MealType (BREAKFAST, LUNCH, DINNER, SNACK)
+- imageUrl: String (optional)
+- ingredients: Json
+- instructions: Json
+- preparationTime: Int
+
+Challenge Model:
+- id: String (UUID)
+- title: String
+- description: String
+- duration: Int
+- rewards: Json
+- type: ChallengeType
+
+Chat Model:
+- id: String (UUID)
+- type: ChatType (DIRECT, GROUP)
+- status: ChatStatus (ACTIVE, ARCHIVED)
+- participants: ChatParticipant[]
+- messages: ChatMessage[]
+
+Notification Model:
+- id: String (UUID)
+- userId: String
+- title: String
+- message: String
+- type: NotificationType
+- read: Boolean
+- entityId: String (optional)
+- data: Json (optional)
+
+================================
+
+API Response Formats
+====================
+
+Standard API Response:
+{
+  "status": "success" | "error",
+  "data": any,
+  "message": string (optional)
+}
+
+User Profile Response:
+{
+  "id": "uuid",
+  "email": "user@example.com",
+  "name": "John Doe",
+  "firstName": "John",
+  "lastName": "Doe",
+  "avatar": "https://...",
+  "role": "USER",
+  "profile": {
+    "height": 175.5,
+    "goals": ["weight_loss", "muscle_gain"],
+    "dietaryRestrictions": ["vegetarian"],
+    "goal": "weight_loss",
+    "initialWeight": 80.0,
+    "targetWeight": 70.0
+  }
+}
+
+Meal Response:
+{
+  "id": "uuid",
+  "name": "Grilled Chicken Salad",
+  "calories": 350,
+  "proteins": 25.5,
+  "carbs": 15.2,
+  "fats": 12.8,
+  "date": "2024-01-15T12:00:00Z",
+  "type": "LUNCH",
+  "imageUrl": "https://...",
+  "ingredients": ["chicken", "lettuce", "tomatoes"],
+  "instructions": ["Step 1", "Step 2"]
+}
+
+Challenge Response:
+{
+  "id": "uuid",
+  "title": "30-Day Fitness Challenge",
+  "description": "Complete 30 days of exercise",
+  "duration": 30,
+  "rewards": {
+    "points": 100,
+    "badge": "fitness_warrior"
+  },
+  "type": "FITNESS"
+}
+
+================================
+
+WebSocket Event Details
+=======================
+
+Connection Events:
+- 'connection': Client connects
+- 'disconnect': Client disconnects
+
+Chat Events:
+- 'chat:join': Join chat room
+- 'chat:leave': Leave chat room
+- 'chat:message': New message
+- 'chat:typing': Typing indicator
+
+Notification Events:
+- 'notification:new': New notification
+- 'notification:read': Mark as read
+- 'test:notification': Test notification
+
+Presence Events:
+- 'presence:update': User online/offline status
+
+================================
+
+Error Handling
+==============
+
+HTTP Status Codes:
+- 200: Success
+- 201: Created
+- 400: Bad Request
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Not Found
+- 422: Validation Error
+- 500: Internal Server Error
+
+Error Response Format:
+{
+  "status": "error",
+  "message": "Error description",
+  "errors": [
+    {
+      "field": "email",
+      "message": "Email is required"
+    }
+  ]
+}
+
+================================
+
+Security Considerations
+=======================
+
+1. JWT Token Security:
+   - Tokens expire after 7 days
+   - Refresh tokens for automatic renewal
+   - Secure storage in mobile app
+
+2. API Security:
+   - CORS configuration for allowed origins
+   - Rate limiting on sensitive endpoints
+   - Input validation with Zod schemas
+
+3. File Upload Security:
+   - File type validation
+   - File size limits
+   - Secure S3 bucket configuration
+
+4. Payment Security:
+   - Webhook signature verification
+   - Secure payment processing
+   - PCI compliance considerations
+
+================================
+
+Performance Considerations
+==========================
+
+1. Database Optimization:
+   - Indexed fields for common queries
+   - Pagination for large datasets
+   - Efficient relationship queries
+
+2. API Optimization:
+   - Response caching where appropriate
+   - Efficient data serialization
+   - Minimal payload sizes
+
+3. Real-time Optimization:
+   - Efficient WebSocket event handling
+   - Connection pooling
+   - Event debouncing
+
+4. Mobile Considerations:
+   - Image compression and optimization
+   - Lazy loading of content
+   - Offline data caching
+   - Background sync capabilities
+
+================================
+
+Testing Strategy
+================
+
+1. Backend Testing:
+   - Unit tests for services
+   - Integration tests for API endpoints
+   - Database migration testing
+
+2. Frontend Testing:
+   - Component unit tests
+   - Integration tests for user flows
+   - E2E tests for critical paths
+
+3. Mobile Testing:
+   - API integration testing
+   - Offline functionality testing
+   - Performance testing
+   - Security testing
+
+================================
+
+Deployment Checklist
+====================
+
+Backend Deployment:
+1. Set up PostgreSQL database
+2. Configure environment variables
+3. Run database migrations
+4. Deploy to hosting platform (Render, Heroku, etc.)
+5. Set up SSL certificates
+6. Configure domain and DNS
+7. Set up monitoring and logging
+
+Frontend Deployment:
+1. Build production bundle
+2. Deploy to CDN (Netlify, Vercel, etc.)
+3. Configure environment variables
+4. Set up custom domain
+5. Enable HTTPS
+6. Configure redirects
+
+Mobile App Deployment:
+1. Configure API endpoints
+2. Set up push notifications
+3. Configure app store listings
+4. Test on multiple devices
+5. Submit for app store review
+
+================================
+
+This overview provides a comprehensive understanding of the LaSo Coach codebase architecture, implementation details, and integration points for mobile development. The new mobile developer should use this as a reference for understanding the existing system and implementing the mobile application. 

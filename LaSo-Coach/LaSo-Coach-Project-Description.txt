@@ -1,0 +1,562 @@
+LaSo-Coach: Comprehensive Fitness Coaching Platform
+==================================================
+
+PROJECT OVERVIEW
+================
+
+LaSo-Coach is a sophisticated, full-stack fitness coaching platform designed to provide personalized training, nutrition guidance, and community support. The platform serves as a complete ecosystem connecting fitness coaches with clients through an intuitive, feature-rich application that combines real-time communication, progress tracking, gamification, and comprehensive health management.
+
+CORE CONCEPT & BUSINESS MODEL
+=============================
+
+The platform operates on a subscription-based model where users pay for access to personalized coaching services, nutrition plans, fitness challenges, and community features. Coaches can manage multiple clients, create customized programs, and track client progress through an advanced admin interface. The system includes gamification elements to increase user engagement and retention.
+
+TECHNICAL ARCHITECTURE
+======================
+
+Development Environment:
+- Frontend: React 18 + TypeScript + Vite + Tailwind CSS
+- Backend: Node.js + Express + TypeScript + PostgreSQL + Prisma ORM
+- Admin Panel: React 19 + Vue 3 Hybrid + TanStack Query + Pinia
+- Real-time: Socket.IO for WebSocket connections
+- Payments: Stripe + PayPal integration
+- File Storage: AWS S3
+- Email: Nodemailer with SMTP templates
+- Authentication: JWT with refresh tokens
+
+Deployment Architecture:
+- Development: Netlify (Frontend) + Render (Backend) + Neon (Database)
+- Staging: Netlify (Frontend) + Render (Backend) + Neon (Database)
+- Production: Hostinger (Frontend) + Render (Backend) + Neon (Database)
+
+DATABASE SCHEMA (25+ MODELS)
+============================
+
+User Management:
+- User: Core user entity with roles (USER, COACH, ADMIN)
+- Profile: Health metrics, goals, preferences, measurements
+- Subscription: Payment plans and billing information
+- SubscriptionPlan: Available subscription tiers
+
+Health & Fitness:
+- Meal: Individual meal entries with nutritional data
+- NutritionPlan: Structured meal plans and guidelines
+- Challenge: Fitness challenges and competitions
+- UserChallenge: User participation and progress in challenges
+- TASCCProgress: Points system and gamification tracking
+- TaskPointConfig: Gamification configuration and rules
+
+Communication & Social:
+- Chat: Real-time messaging conversations
+- ChatMessage: Individual messages with metadata
+- Community: Social features and posts
+- Post: Community posts and content
+- Comment: Post comments and interactions
+- Like: Social engagement tracking
+
+Coaching & Education:
+- CoachingSession: One-on-one and group sessions
+- Content: Educational content and resources
+- UserContent: User-specific content assignments
+- FAQ: Help system and frequently asked questions
+
+System Features:
+- Notification: Push notification system
+- NotificationTemplate: Email and push notification templates
+
+API STRUCTURE (25+ ROUTE FILES)
+===============================
+
+Authentication & User Management:
+/api/v1/auth/
+- POST /login - User authentication
+- POST /register - User registration
+- POST /refresh - Token refresh
+- POST /logout - User logout
+- POST /forgot-password - Password reset request
+- POST /reset-password - Password reset confirmation
+
+User Profile & Onboarding:
+/api/v1/users/
+- GET /profile - Get user profile
+- PUT /profile - Update user profile
+- GET /profile/avatar - Get user avatar
+- POST /profile/avatar - Upload user avatar
+
+/api/v1/onboarding/
+- GET /progress - Get onboarding progress
+- POST /measurements - Submit health measurements
+- POST /goals - Set user goals
+- POST /preferences - Set user preferences
+
+Nutrition & Meal Management:
+/api/v1/nutrition/
+- GET /meals - Get user meals
+- POST /meals - Create meal entry
+- PUT /meals/:id - Update meal
+- DELETE /meals/:id - Delete meal
+- GET /plans - Get nutrition plans
+- POST /plans - Create nutrition plan
+
+Fitness Challenges:
+/api/v1/challenges/
+- GET / - Get available challenges
+- POST / - Create new challenge
+- GET /:id - Get challenge details
+- POST /:id/join - Join challenge
+- POST /:id/submit - Submit challenge entry
+
+Real-time Communication:
+/api/v1/chat/
+- GET /conversations - Get chat conversations
+- POST /conversations - Create conversation
+- GET /conversations/:id/messages - Get messages
+- POST /conversations/:id/messages - Send message
+- PUT /conversations/:id/read - Mark as read
+
+Coaching Sessions:
+/api/v1/coaching/
+- GET /sessions - Get coaching sessions
+- POST /sessions - Create session
+- PUT /sessions/:id - Update session
+- DELETE /sessions/:id - Cancel session
+- POST /sessions/:id/feedback - Submit feedback
+
+Community Features:
+/api/v1/community/
+- GET /posts - Get community posts
+- POST /posts - Create post
+- PUT /posts/:id - Update post
+- DELETE /posts/:id - Delete post
+- POST /posts/:id/comments - Add comment
+- POST /posts/:id/like - Like/unlike post
+
+Payment Processing:
+/api/v1/payments/
+- POST /stripe/create-payment-intent - Create Stripe payment
+- POST /paypal/create-order - Create PayPal order
+- POST /paypal/capture-order - Capture PayPal payment
+- GET /subscriptions - Get user subscriptions
+- POST /subscriptions - Create subscription
+
+Notifications:
+/api/v1/notifications/
+- GET / - Get user notifications
+- PUT /:id/read - Mark notification as read
+- DELETE /:id - Delete notification
+
+Gamification System:
+/api/v1/tascc/
+- GET /progress - Get user progress
+- GET /leaderboard - Get leaderboard
+- POST /points - Award points
+- GET /tasks - Get available tasks
+
+Admin Management:
+/api/v1/admin/
+- GET /users - Get all users
+- PUT /users/:id - Update user
+- DELETE /users/:id - Delete user
+- GET /analytics - Get system analytics
+- POST /content - Create content
+- PUT /content/:id - Update content
+
+Webhooks:
+/api/v1/webhooks/
+- POST /stripe - Stripe webhook handler
+- POST /paypal - PayPal webhook handler
+
+FRONTEND APPLICATION FEATURES
+============================
+
+Core Pages (15+ Pages):
+
+Dashboard (8.3KB):
+- User overview and progress summary
+- Quick action buttons
+- Recent activity feed
+- Progress charts and metrics
+- Upcoming sessions and challenges
+
+Progress Tracking (20KB):
+- Health metrics visualization
+- Goal tracking and achievements
+- Progress charts and graphs
+- Measurement history
+- Achievement badges and rewards
+
+Nutrition Management (2.2KB):
+- Meal planning and tracking
+- Food logging with nutritional data
+- Menu of the day display
+- Nutrition plan adherence
+- Calorie and macro tracking
+
+Fitness Challenges (26KB):
+- Available challenges display
+- Challenge participation
+- Submission system
+- Leaderboards and rankings
+- Challenge progress tracking
+
+Agenda & Scheduling (5.5KB):
+- Content scheduling
+- Session management
+- Calendar integration
+- Appointment booking
+- Reminder system
+
+Real-time Chat (17KB):
+- Instant messaging with coaches
+- File sharing capabilities
+- Message history
+- Typing indicators
+- Online/offline status
+
+Community (Agora) (31KB):
+- Social feed and posts
+- Comment and like system
+- User profiles and connections
+- Content sharing
+- Community guidelines
+
+Notifications (20KB):
+- Push notification center
+- Notification preferences
+- Message notifications
+- System announcements
+- Activity alerts
+
+Authentication Flow:
+- Login/Register with email validation
+- JWT token management
+- Automatic session refresh
+- Protected routes
+- Role-based access control
+
+Onboarding Flow (8 Pages):
+- Welcome screen and introduction
+- Profile setup and health data
+- Goal setting and preferences
+- Subscription selection
+- Payment setup and confirmation
+
+Real-time Features:
+- WebSocket Context for global connection management
+- Chat Context for real-time messaging
+- Notification Bell with live updates
+- Floating Chat Button for quick access
+- Presence system for online/offline status
+
+UI/UX Design:
+- Color Scheme: Green theme (#D6F5A7, #AED036, #2C340E)
+- Responsive Design: Mobile-first approach
+- Sidebar Navigation: Collapsible on mobile
+- Loading States: Skeleton screens and spinners
+- Toast Notifications: User feedback system
+
+ADMIN PANEL FEATURES
+====================
+
+Technology Stack:
+- React 19 + Vue 3 hybrid architecture
+- TanStack Query for state management
+- Pinia for Vue state management
+- Chart.js for analytics visualization
+- Radix UI components
+- PapaParse for data export
+
+Core Admin Pages (15+ Pages):
+
+Dashboard (19KB):
+- System overview and statistics
+- User engagement metrics
+- Revenue analytics
+- Performance monitoring
+- Real-time activity feed
+
+User Management (23KB):
+- Complete user CRUD operations
+- Advanced filtering and search
+- Role management and permissions
+- User activity tracking
+- Bulk operations
+
+Nutrition Management (33KB):
+- Meal plan creation and editing
+- Menu management system
+- Nutritional data management
+- Plan assignment to users
+- Analytics and reporting
+
+Challenge Management (20KB):
+- Challenge creation and editing
+- Participant monitoring
+- Submission review system
+- Leaderboard management
+- Challenge analytics
+
+Coaching Management (13KB):
+- Session scheduling and management
+- Coach availability tracking
+- Client-coach assignments
+- Session feedback and ratings
+- Performance analytics
+
+Community Management:
+- Post moderation and management
+- Content filtering and approval
+- User interaction monitoring
+- Community guidelines enforcement
+- Engagement analytics
+
+Content Management (5.7KB):
+- Educational content creation
+- Content assignment to users
+- Media management
+- Content analytics
+- Version control
+
+FAQ Management (7.7KB):
+- FAQ creation and editing
+- Category management
+- Search and filtering
+- Analytics and reporting
+- User feedback integration
+
+Analytics & Reporting:
+- Detailed user analytics
+- Revenue and subscription reports
+- Engagement metrics
+- Performance monitoring
+- Custom report generation
+
+TASCC Points Administration (49KB):
+- Points system configuration
+- Task management and assignment
+- Leaderboard administration
+- Reward system management
+- Gamification analytics
+
+Payment Management (26KB):
+- Transaction monitoring
+- Subscription management
+- Refund processing
+- Payment analytics
+- Revenue reporting
+
+Subscription Plan Management (9.5KB):
+- Plan creation and editing
+- Pricing management
+- Feature assignment
+- Plan analytics
+- A/B testing support
+
+REAL-TIME FEATURES
+==================
+
+WebSocket Implementation:
+- Global WebSocket connection management
+- Automatic reconnection with exponential backoff
+- Connection status monitoring
+- Error handling and recovery
+- Cross-tab synchronization
+
+Chat System:
+- Real-time messaging between users and coaches
+- Message delivery confirmation
+- Typing indicators
+- File sharing capabilities
+- Message history and search
+- Unread message tracking
+
+Notification System:
+- Instant push notifications
+- Email notification templates
+- In-app notification center
+- Notification preferences
+- Delivery status tracking
+
+Presence System:
+- Online/offline status tracking
+- Last seen timestamps
+- Activity indicators
+- Status synchronization across devices
+
+PAYMENT INTEGRATION
+===================
+
+Stripe Integration:
+- Payment intent creation
+- Checkout session management
+- Subscription handling
+- Webhook processing
+- Refund processing
+- Payment method management
+
+PayPal Integration:
+- Order creation and capture
+- Subscription management
+- Webhook handling
+- Payment verification
+- Refund processing
+
+Subscription Management:
+- Plan assignment and billing
+- Automatic renewal processing
+- Proration handling
+- Cancellation management
+- Payment failure handling
+
+SECURITY FEATURES
+=================
+
+Authentication & Authorization:
+- JWT token-based authentication
+- Refresh token mechanism
+- Role-based access control
+- Session management
+- Password hashing with bcrypt
+
+Data Protection:
+- Input validation with Zod schemas
+- SQL injection prevention
+- XSS protection
+- CSRF protection
+- Rate limiting
+
+File Upload Security:
+- File type validation
+- Size restrictions
+- Virus scanning
+- Secure storage on AWS S3
+- Access control
+
+API Security:
+- Helmet.js for security headers
+- CORS configuration
+- Request validation
+- Error handling
+- Logging and monitoring
+
+PERFORMANCE OPTIMIZATION
+========================
+
+Frontend Optimization:
+- Code splitting and lazy loading
+- Image optimization and compression
+- Bundle size optimization
+- Caching strategies
+- Progressive Web App features
+
+Backend Optimization:
+- Database query optimization
+- Connection pooling
+- Caching with Redis
+- API response optimization
+- Background job processing
+
+Database Optimization:
+- Indexed queries
+- Efficient schema design
+- Connection management
+- Query optimization
+- Data archiving
+
+MONITORING & ANALYTICS
+======================
+
+System Monitoring:
+- Application performance monitoring
+- Error tracking and reporting
+- User behavior analytics
+- Performance metrics
+- Uptime monitoring
+
+User Analytics:
+- User engagement tracking
+- Feature usage analytics
+- Conversion funnel analysis
+- Retention metrics
+- A/B testing capabilities
+
+Business Analytics:
+- Revenue tracking
+- Subscription analytics
+- Coach performance metrics
+- Content effectiveness
+- ROI analysis
+
+DEPLOYMENT & DEVOPS
+===================
+
+CI/CD Pipeline:
+- Automated testing
+- Code quality checks
+- Security scanning
+- Automated deployment
+- Rollback capabilities
+
+Environment Management:
+- Development environment
+- Staging environment
+- Production environment
+- Environment-specific configurations
+- Database migrations
+
+Monitoring & Logging:
+- Application logging
+- Error tracking
+- Performance monitoring
+- User analytics
+- System health monitoring
+
+SCALABILITY CONSIDERATIONS
+=========================
+
+Horizontal Scaling:
+- Load balancing
+- Database sharding
+- Microservices architecture
+- Container orchestration
+- Auto-scaling capabilities
+
+Vertical Scaling:
+- Resource optimization
+- Database optimization
+- Caching strategies
+- CDN implementation
+- Performance tuning
+
+Data Management:
+- Data archiving
+- Backup strategies
+- Disaster recovery
+- Data migration
+- Compliance requirements
+
+FUTURE ENHANCEMENTS
+===================
+
+Mobile Application:
+- React Native development
+- Native iOS and Android apps
+- Push notification integration
+- Offline functionality
+- Mobile-specific features
+
+Advanced Features:
+- AI-powered recommendations
+- Machine learning analytics
+- Advanced gamification
+- Social features enhancement
+- Integration with fitness devices
+
+Enterprise Features:
+- White-label solutions
+- Multi-tenant architecture
+- Advanced analytics
+- Custom integrations
+- API marketplace
+
+This comprehensive platform represents a complete fitness coaching ecosystem designed to provide personalized, engaging, and effective fitness experiences for users while offering powerful management tools for coaches and administrators. 
