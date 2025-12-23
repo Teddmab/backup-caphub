@@ -1,0 +1,185 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==================== USER & AUTH ====================
+model User {
+  id        String     @id @default(cuid())
+  firebaseUid String?  @unique
+  email     String     @unique
+  password  String
+  username  String     @unique
+  firstName String?
+  lastName  String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  readings      BloodGlucoseReading[]
+  goals         DiabetesGoal[]
+  familyMembers FamilyMember[]
+  achievements  UserAchievement[]
+  preferences   LocalMarketPreference[]
+  shoppingLists ShoppingList[]
+}
+
+// ==================== BLOOD GLUCOSE ====================
+model BloodGlucoseReading {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  value     Int      // mg/dL
+  timestamp DateTime @default(now())
+  mealBefore Boolean?
+  activity  String?
+  notes     String?
+  photoUrl  String?
+
+  @@index([userId])
+}
+
+// ==================== DIABETES GOALS ====================
+model DiabetesGoal {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  description String?
+  targetValue Int
+  currentValue Int @default(0)
+  status    String   @default("active") // active, completed, archived
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+// ==================== FAMILY ====================
+model Family {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+
+  members FamilyMember[]
+}
+
+model FamilyMember {
+  id       String @id @default(cuid())
+  familyId String
+  family   Family @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role     String // child, parent, guardian, extended
+  joinedAt DateTime @default(now())
+
+  @@index([familyId])
+  @@index([userId])
+}
+
+// ==================== LOCAL MARKETS ====================
+model LocalMarket {
+  id      String   @id @default(cuid())
+  name    String
+  type    String   // supermarket, farmers_market, organic, csa
+  address String
+  lat     Float
+  lng     Float
+  hours   String?
+  website String?
+  phone   String?
+
+  products LocalMarketProduct[]
+}
+
+model LocalMarketProduct {
+  id        String      @id @default(cuid())
+  marketId  String
+  market    LocalMarket @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  name      String
+  price     Float
+  currency  String      @default("EUR")
+  category  String
+  calories  Int?
+  carbs     Int?
+  protein   Int?
+  fat       Int?
+  glycemicIndex Int?
+  lastUpdated DateTime @default(now())
+
+  @@index([marketId])
+}
+
+model LocalMarketPreference {
+  id         String @id @default(cuid())
+  userId     String
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  marketId   String
+  frequency  String // weekly, biweekly, monthly
+  preferredDays String // JSON array of days
+
+  @@index([userId])
+}
+
+// ==================== SHOPPING LIST ====================
+model ShoppingList {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  status    String   @default("active") // active, completed
+  createdAt DateTime @default(now())
+
+  items ShoppingListItem[]
+
+  @@index([userId])
+}
+
+model ShoppingListItem {
+  id       String   @id @default(cuid())
+  listId   String
+  list     ShoppingList @relation(fields: [listId], references: [id], onDelete: Cascade)
+  name     String
+  quantity Int
+  unit     String
+  checked  Boolean  @default(false)
+
+  @@index([listId])
+}
+
+// ==================== GAMIFICATION ====================
+model Badge {
+  id   String @id @default(cuid())
+  name String @unique
+  description String?
+  icon String?
+  category String // health, nutrition, family, social
+
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  badgeId   String
+  badge     Badge    @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+  unlockedAt DateTime @default(now())
+
+  @@unique([userId, badgeId])
+  @@index([userId])
+}
+
+model Challenge {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  duration    Int      // days
+  reward      Int      // points
+  createdAt   DateTime @default(now())
+}
